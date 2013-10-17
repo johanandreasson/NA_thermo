@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/na_thermo/!svn/ver/37/PCR_assembly
+END
+order_primers_along_template.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/na_thermo/!svn/ver/31/PCR_assembly/order_primers_along_template.m
+END
+design_primers.m
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/na_thermo/!svn/ver/31/PCR_assembly/design_primers.m
+END
+design_primers60.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/na_thermo/!svn/ver/31/PCR_assembly/design_primers60.m
+END
+output_primers.m
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/na_thermo/!svn/ver/31/PCR_assembly/output_primers.m
+END
+design_two_primers.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/na_thermo/!svn/ver/31/PCR_assembly/design_two_primers.m
+END
