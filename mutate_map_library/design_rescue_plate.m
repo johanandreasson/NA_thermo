@@ -53,7 +53,7 @@ mutations = design_rescue (sequence, structure, offset, mode_flag, seqpos_sub);
 % find primer assembly
 primers = design_primers(sequence, Tm);
 % write mutants list
-design_mutants(primers, sequence, mutations, offset, mut_file, mut_label_start);
+design_mutants(primers, sequence, mutations, offset, mut_file, mut_label_start, 1);
 % find mutant assembly
 [sequences_to_order,sequence_names] = mutate_primers_each( primers, [mut_file,'.txt'] );
 % write layout files

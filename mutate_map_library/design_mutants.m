@@ -1,4 +1,4 @@
-function [mut_seq, mut_lab] = design_mutants(primers, sequence, mutations, offset, mutfile, mut_label_start)
+function [mut_seq, mut_lab] = design_mutants(primers, sequence, mutations, offset, mutfile, mut_label_start, is_print)
 % [mut_seq, mut_lab] = DESIGN_MUTANTS (primers, sequence, mutations, [offset],
 %                                       [mutfile], [mut_label_start])
 %
@@ -35,6 +35,7 @@ if ~exist('mut_label_start','var');  mut_label_start = ''; end;
 if ~exist('mutfile','var');  mutfile = 'Mutants'; end;
 mutfile = [mutfile, '.txt'];
 if ~exist('offset','var');   offset = 0; end;
+if ~exist('is_print','var') || isempty(is_print); is_print = 1; end;
 sequence = upper(sequence);
 
 fid = fopen(  mutfile, 'w' );
@@ -66,13 +67,15 @@ for i = 1:length( mutations )
       lab_mut{i}=mut_label;
   end;
   
-  fprintf( 1, '%s %s\n', sequence_mut, mut_label );
-  fprintf( fid, '%s %s\n', sequence_mut, mut_label );
+  if is_print; 
+      fprintf( 1, '%s %s\n', sequence_mut, mut_label ); 
+      fprintf( fid, '%s %s\n', sequence_mut, mut_label );
+  end;
 end;
 
 fclose( fid );
 
-mutate_primers( primers, mutfile );
+if ~isempty(primers); mutate_primers( primers, mutfile ); end;
 
 mut_seq = rot90(seq_mut,3);
 mut_lab = rot90(lab_mut,3);
