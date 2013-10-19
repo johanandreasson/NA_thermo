@@ -9,7 +9,7 @@ function [mut_seq, mut_lab] = design_mutants(primers, sequence, mutations, offse
 % =Input=
 %   primers             Primers to assemble the targeted sequence, generated
 %                          from design_primers_NEW. Format as cell.
-%   sequence            Sequence of WT.
+%   sequence            Sequence of WT. Will be converted to DNA sequence.
 %   mutations           Set of mutatants. Format as cell. Each construct is
 %                          specified by string annotation, e.g. 'A200C'. 
 %                          Multiple mutations within one construct is
@@ -32,11 +32,17 @@ function [mut_seq, mut_lab] = design_mutants(primers, sequence, mutations, offse
 if nargin == 0; help( mfilename ); return; end;
 
 if ~exist('mut_label_start','var');  mut_label_start = ''; end;
-if ~exist('mutfile','var');  mutfile = 'Mutants'; end;
+if ~exist('mutfile','var') || isempty(mutfile);  mutfile = 'Mutants'; end;
 mutfile = [mutfile, '.txt'];
 if ~exist('offset','var');   offset = 0; end;
 if ~exist('is_print','var') || isempty(is_print); is_print = 1; end;
-sequence = upper(sequence);
+
+sequence = strrep(upper(sequence),'U','T');
+for i = 1:length(mutations)
+    for j = 1:length(mutations{i})
+        mutations{i}{j} = strrep(mutations{i}{j}, 'U', 'T');
+    end;
+end;
 
 fid = fopen(  mutfile, 'w' );
 

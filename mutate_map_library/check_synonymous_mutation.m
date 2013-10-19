@@ -1,11 +1,20 @@
 function [syn_names, syn_seqs] = check_synonymous_mutation (wt_sequence, seq_offset, cod_offset, std_dir, all_names)
 
+if nargin == 0; help( mfilename ); return; end;
+
 if ~exist('seq_offset','var') || isempty(seq_offset); seq_offset = 0; end;
 if ~exist('cod_offset','var') || isempty(cod_offset); cod_offset = 0; end;
 if ~exist('std_dir','var') || isempty(std_dir) || (std_dir ~= 1 && std_dir ~= -1); std_dir = 1; end;
 if ~exist('all_names','var') || isempty(all_names); return; end;
 
 cod_tab = codon_table;
+wt_sequence = strrep(wt_sequence, 'T','U');
+for i = 1:length(all_names)
+    for j = 1:length(all_names{i})
+        all_names{i}{j} = strrep(strrep(all_names{i}{j}, 'T', 'U'),'WU', 'WT');
+    end;
+end;
+
 show_ORF(wt_sequence, cod_offset, std_dir);
 
 % prepare sequence and ORF

@@ -1,5 +1,34 @@
 function [aas, codons] = show_ORF(sequence, cod_offset, std_dir)
 
+% [aas, codons] = SHOW_ORF (sequence, cod_offset, std_dir);
+%
+% Output ORF triplets and peptide sequence to the command line window. Stop
+%   codon will be colored red. Sense strand will be displayed, in RNA, not
+%   DNA sequence.
+%
+% Input
+% =====
+%   sequence                Sequence of RNA. Will be converted to RNA
+%                               sequences for use.
+%   cod_offset              Offset for ORF. It could be any non-negative
+%                               integers within sequence length. Always
+%                               count from 5' of input sequence regardless
+%                               of std_dir. For ORF starting from 1st nt,
+%                               cod_offset = 0;
+%   std_dir                 Strand direction. 1 as input sequence is sense,
+%                               -1 as anti-sense.
+%
+% Output
+% ======
+%   aas                     Cell string of amino acid identities in
+%                               3-letter names, e.g. Ala.
+%   codons                  Cell string of codon identities, e.g. AUG.
+%
+%
+% by T47, Oct 2013.
+%
+
+if nargin == 0; help( mfilename ); return; end;
 cod_tab = codon_table;
 
 % prepare sequence and ORF

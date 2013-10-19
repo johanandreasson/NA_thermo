@@ -1,4 +1,4 @@
-function [syn_names, syn_seqs] = design_synonymous_mutation (sequence, seq_offset, cod_offset, std_dir, mode_flag, max_cod_mut, max_total_mut)
+function [syn_names, syn_seqs] = design_synonymous_mutation (sequence, seq_offset, cod_offset, std_dir, mode_flag, max_total_mut)
 
 if nargin == 0; help( mfilename ); return; end;
 
@@ -18,13 +18,9 @@ if strfind(mode_str, 'full');
 else
     full_flag = 0;
 end;
-
-if ~exist('max_cod_mut','var') || isempty(max_cod_mut); max_cod_mut = 4; end;
-if ~isinteger(max_cod_mut); max_cod_mut = round(max_cod_mut); end;
-if sign(max_cod_mut) == -1; max_cod_mut = 0; end;
-if ~exist('max_total_mut','var') || isempty(max_total_mut); max_total_mut = 0; end;
-if ~isinteger(max_total_mut); max_total_mut = round(max_total_mut); end;
-if sign(max_total_mut) == -1; max_total_mut = 0; end;
+if ~exist('max_total_mut','var') || isempty(max_total_mut);
+    max_total_mut = 0;
+elseif ~isint
 
 % parse all codons
 cod_tab = codon_table;

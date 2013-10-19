@@ -1,15 +1,56 @@
 function output_triplet_seq(all_names, codons, sequences, cod_offset, wt_flag, std_dir)
-% display all sequences in triplets
+
+%
+% OUTPUT_TRIPLET_SEQ (all_names, codons, sequences, cod_offset, wt_flag, std_dir);
+%
+% Displays all sequences in triplets to the command line window. Stop
+%   codon will be colored red. Input strand will be displayed, in RNA, not
+%   DNA sequence. Wild-type should always be first entry in all_names and
+%   sequences.
+%
+% Input
+% =====
+%   all_names               Set of mutatants. Format as cell. Each construct 
+%                               is specified by string annotation, e.g. 
+%                               'A200C'.  Multiple mutations within one 
+%                               construct is recognied by a cell of strings,
+%                               e.g. {'A200C', 'G201T'}. Numbering includes 
+%                               offset. Use {{'WT'}} for wild-type.
+%   codons                  Codons of mutants in all_names. Each row is one
+%                               one mutant, each column is one amino acid
+%                               codon. Will be converted to RNA sequence.
+%   sequences               Sequences of mutants in all_names. Format as
+%                               cell string. Will be converted to RNA
+%                               sequence.
+%   cod_offset              Offset for ORF. It could be any non-negative
+%                               integers within sequence length. Always
+%                               count from 5' of input sequence regardless
+%                               of std_dir. For ORF starting from 1st nt,
+%                               cod_offset = 0;
+%   wt_flag                 Flag for whether wild-type will not be 
+%                               displayed. 0 for no, 1 for yes.
+%   std_dir                 Strand direction. 1 as input sequence is sense,
+%                               -1 as anti-sense.
+%
+%
+% by T47, Oct 2013.
+%
 
 cod_tab = codon_table;
 
-if std_dir == -1;
-    for i = 1: length(sequences)
+for i = 1: length(sequences)
+    if std_dir == -1;
         sequences(i) = strrep(reverse(sequences(i)),'T','U');
+    else
+        sequences(i) = strrep(sequences(i),'T','U');
     end;
-    for i = 1: size(codons,1)
-        for j = 1:size(codons,2)
+end;
+for i = 1: size(codons,1)
+    for j = 1:size(codons,2)
+        if std_dir == -1
             codons{i,j} = strrep(complement(codons{i,j}),'T','U');
+        else
+            codons{i,j} = strrep(complement(complement(codons{i,j})),'T','U');
         end;
     end;
 end;
@@ -43,14 +84,3 @@ for j = 1+(1-wt_flag):size(codons,1)
 end;
 
 
-function mut_str = combine_mutant_label(mut_label)
-% convert mutation label to string
-mut_str = '';
-for i = 1:length(mut_label)
-    mut_str = [mut_str, mut_label{i},';'];
-end;
-if isempty(mut_str);
-    mut_str = 'WT';
-else
-    mut_str = mut_str(1:end-1);
-end;

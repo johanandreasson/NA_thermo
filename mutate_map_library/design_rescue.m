@@ -59,6 +59,7 @@ else
     end;
     seqpos_sub = seqpos_temp;
 end;
+sequence = strrep(sequence,'U','T');
 
 % read flag
 mode_str = lower([mode_flag{1:end}]);
