@@ -1,92 +1,0 @@
-10
-
-dir
-40
-https://simtk.org/svn/na_thermo
-https://simtk.org/svn/na_thermo
-
-
-
-2013-10-17T20:35:13.357079Z
-40
-t47
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-f46308bc-c8a1-0410-93bc-fea415910051
-
-mutate_map_library
-dir
-
-mutate_primers
-dir
-
-Example_scripts
-dir
-
-PCR_assembly
-dir
-
-sequence_util
-dir
-
-RT_primers
-dir
-
-MAPseq_primers
-dir
-
-orthogonal_tails
-dir
-
-thermo_util
-dir
-
-README.txt
-file
-
-
-
-
-2013-10-17T21:58:03.000000Z
-a8cfcc0cfbe9a1613d039de4185a6e96
-2013-03-31T01:10:31.205124Z
-39
-rhiju
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1787
-
-x_deprecated_x
-dir
-
