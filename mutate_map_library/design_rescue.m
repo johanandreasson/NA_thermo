@@ -102,6 +102,7 @@ constructs = cell((size(bps,1)-multi_flag)*(qrt_flag*2+1)+1, 1);
 construct_names = cell((size(bps,1)-multi_flag)*(qrt_flag*2+1)+1, 1);
 
 % fill in double mutations, no.1 is always WT
+tic;
 constructs{1,1} = {'WT'};
 construct_names{1} = constructs{1,1};
 for i = 1:(size(bps,1) - multi_flag)
@@ -171,6 +172,8 @@ for i = 1:size(construct_names,1);
     end;
     fprintf([name(2:end),'\n']);
 end;
+
+fprintf('\n'); toc; fprint('\n');
 
 
 function mut_char = sequence_mutate_table(wt_char, mut_flag)
